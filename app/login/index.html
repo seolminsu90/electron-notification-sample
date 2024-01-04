@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang='ko' xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta charset='UTF-8'>
+    <title>알림앱</title>
+    <link href='../assets/reset.css' rel='stylesheet'>
+    <link href='../assets/common.css' rel='stylesheet'>
+    <link href='./login.css' rel='stylesheet'>
+</head>
+<body>
+<script src='../vue3.js'></script>
+
+<div id='app'>
+    <div class='center-flex-box'>
+        <div class='login-wrap p-3'>
+            <div class='text-center'>
+                <h1>Login</h1>
+            </div>
+            <div class='row mb-3'>
+                <small class='form-label'>아이디</small>
+                <div class=''>
+                    <input type='text' class='form-control' />
+                </div>
+            </div>
+            <div class='row mb-3'>
+                <small class='form-label'>비밀번호</small>
+                <div class=''>
+                    <input type='password' class='form-control' />
+                </div>
+            </div>
+            <div class='row ps-2 pe-2 text-center'>
+                <button type='button' class='btn btn-primary' @click='login'>로그인</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const { createApp, ref, onMounted } = Vue
+    const { ipcRenderer } = require('electron')
+
+    createApp({
+        setup() {
+            const message = ref('Hello vue!')
+            const login = () => {
+                // TODO Login Process Here !!
+
+                ipcRenderer.send('onLoginSuccess', 'INPUT YOUR USER DATA')
+            }
+
+            const addListener = () => {
+                // MainApp 로그인 성공 이후 호출됨
+                ipcRenderer.on('replyLoginSuccess', (evt, payload) => {
+                    location.href = '../index/index.html'
+                })
+            }
+
+            onMounted(() => addListener())
+
+            return {
+                message,
+                login
+            }
+        }
+    }).mount('#app')
+</script>
+</body>
+</html>

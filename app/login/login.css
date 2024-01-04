@@ -1,0 +1,19 @@
+body{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    background-image: url("../assets/bg.jpg");
+}
+
+.login-wrap{
+    width:50vw;
+    height:30vh;
+    min-width: 300px;
+    min-height:300px;
+    background:#fff;
+    border-radius: 8px;
+}
+
+h1 {
+    font-weight: bold;
+}
