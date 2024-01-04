@@ -1,6 +1,10 @@
 body{
     height:100vh;
     font-family: 'Nanum Barun Gothic', sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 #app {

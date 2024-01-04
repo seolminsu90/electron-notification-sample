@@ -3,7 +3,7 @@ const WebSocket = require('websocket').w3cwebsocket
 let webSocket
 const init = () => {
     return new Promise((resolve, reject) => {
-        const serverAddress = 'ws://YOUR_WEBSOCKET_ENDPOINT/ws'
+        const serverAddress = 'ws://YOUR_SOCKET_SERVER_HOST'
 
         webSocket = new WebSocket(serverAddress)
 
