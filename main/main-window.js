@@ -7,11 +7,11 @@ const createWindow = async () => {
     let mainWindow = new BrowserWindow({
         width: 850,
         height: 485,
-        resizable:false,
+        resizable: true,
         title: AppConst.APPLICATION_NAME,
         webPreferences: {
             nodeIntegration: true,
-            contextIsolation: false,
+            contextIsolation: true,
             preload: path.join(__dirname, 'preload.js')
         },
         icon: ICON_PATH

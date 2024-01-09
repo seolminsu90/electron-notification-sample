@@ -105,7 +105,7 @@
         </div>
         <script>
             const { createApp, ref, onMounted } = Vue
-            const { ipcRenderer } = require('electron')
+            //const { ipcRenderer } = require('electron')
 
             createApp({
                 setup() {
@@ -120,20 +120,18 @@
                             }
                         }
 
-                        if (ipcRenderer) ipcRenderer.send('onSendMessage', JSON.stringify(payload))
+                        MainApp.sendMessage('onSendMessage', JSON.stringify(payload))
                     }
                     const moveTab = (tab) => {
                         active.value = tab
                     }
 
                     const addListener = () => {
-                        // socket echo message
-                        if (ipcRenderer)
-                            ipcRenderer.on('replySendMessage', (evt, payload) => {
-                                console.log(payload)
-                                const msg = JSON.parse(payload)
-                                messages.value.push(msg.message)
-                            })
+                        MainApp.eventListen('replySendMessage', (evt, payload) => {
+                            console.log(payload)
+                            const msg = JSON.parse(payload)
+                            messages.value.push(msg.message)
+                        })
                     }
 
                     onMounted(() => addListener())

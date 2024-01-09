@@ -1,10 +1,7 @@
-window.addEventListener('DOMContentLoaded', () => {
-    const replaceText = (selector, text) => {
-        const element = document.getElementById(selector)
-        if (element) element.innerText = text
-    }
+const { ipcRenderer, contextBridge } = require('electron')
 
-    for (const dependency of ['chrome', 'node', 'electron']) {
-        replaceText(`${dependency}-version`, process.versions[dependency])
-    }
+// Renderer, Main을 연결해줄 기능들을 정의한다.
+contextBridge.exposeInMainWorld('MainApp', {
+    sendMessage: (type, message) => ipcRenderer.send(type, message),
+    eventListen: (type, callback) => ipcRenderer.on(type, callback)
 })

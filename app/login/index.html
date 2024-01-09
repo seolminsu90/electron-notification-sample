@@ -36,7 +36,6 @@
 
 <script>
     const { createApp, ref, onMounted } = Vue
-    const { ipcRenderer } = require('electron')
 
     createApp({
         setup() {
@@ -44,12 +43,12 @@
             const login = () => {
                 // TODO Login Process Here !!
 
-                ipcRenderer.send('onLoginSuccess', 'INPUT YOUR USER DATA')
+                MainApp.sendMessage('onLoginSuccess', 'INPUT YOUR USER DATA')
             }
 
             const addListener = () => {
-                // MainApp 로그인 성공 이후 호출됨
-                ipcRenderer.on('replyLoginSuccess', (evt, payload) => {
+                // MainApp 로그인 성공 이후 호출되는 이벤트 리스너 등록
+                MainApp.eventListen('replyLoginSuccess', (evt, payload) => {
                     location.href = '../index/index.html'
                 })
             }
