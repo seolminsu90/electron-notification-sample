@@ -6,10 +6,9 @@ const { loadPage } = require('./main/page.js')
 const AppConst = require('./main/const.js')
 
 const path = require('path')
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'development'
 
 require('./main/menu.js')
-require('electron-debug')() // DEBUG CONSOLE SHOW
 
 if (process.platform === 'win32') {
     app.setAppUserModelId(app.name)
@@ -19,7 +18,10 @@ if (env === 'development') {
     require('electron-reload')(__dirname, {
         electron: path.join(__dirname, 'node_modules', '.bin', 'electron'),
         hardResetMethod: 'exit'
-    });
+    })
+
+    // Debug console
+    require('electron-debug')()
 }
 
 let mainWindow
@@ -29,6 +31,10 @@ app.whenReady().then(async () => {
     mainWindow = await createWindow()
     tray = await createTray(mainWindow)
     await loadPage(mainWindow, AppConst.MAIN)
+
+    if (env === 'development') {
+        mainWindow.webContents.openDevTools({ mode: 'detach' })
+    }
 
     appEventListen()
     ipcEventListen()
@@ -45,6 +51,5 @@ const appEventListen = () => {
         if (process.platform !== 'darwin') app.quit()
     })
 
-    app.on('before-quit', () => app.isQuiting = true)
+    app.on('before-quit', () => (app.isQuiting = true))
 }
-

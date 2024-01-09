@@ -1,66 +1,75 @@
 <!DOCTYPE html>
-<html lang='ko' xmlns='http://www.w3.org/1999/xhtml'>
-<head>
-    <meta charset='UTF-8'>
-    <title>알림앱</title>
-    <link href='../assets/reset.css' rel='stylesheet'>
-    <link href='../assets/common.css' rel='stylesheet'>
-    <link href='./login.css' rel='stylesheet'>
-</head>
-<body>
-<script src='../vue3.js'></script>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8" />
+        <title>알림앱</title>
+        <link href="../assets/reset.css" rel="stylesheet" />
+        <link href="../assets/common.css" rel="stylesheet" />
+        <link href="./login.css" rel="stylesheet" />
+    </head>
+    <body>
+        <script src="../vue3.js"></script>
 
-<div id='app'>
-    <div class='center-flex-box'>
-        <div class="login-bg"></div>
-        <div class='login-wrap'>
-            <div class='text-center mb-3'>
-                <h1>Login</h1>
-            </div>
-            <div class='row mb-3'>
-                <div class=''>
-                    <input type='text' class='form-control' placeholder="아이디"/>
+        <div id="app">
+            <div class="center-flex-box">
+                <div class="login-bg"></div>
+                <div class="login-wrap">
+                    <div class="text-center mb-3">
+                        <h1>Login</h1>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="">
+                            <input type="text" class="form-control" placeholder="아이디" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="">
+                            <input type="password" class="form-control" placeholder="패스워드" />
+                        </div>
+                    </div>
+                    <div class="row ps-2 pe-2 text-center">
+                        <button type="button" class="btn bg-white" @click="login">로그인</button>
+                    </div>
                 </div>
             </div>
-            <div class='row mb-3'>
-                <div class=''>
-                    <input type='password' class='form-control'  placeholder="패스워드"/>
+            <div class="dim" v-show="loading">
+                <div class="loader-container">
+                    <div class="loader"></div>
+                    <p>로그인 요청 중..</p>
                 </div>
-            </div>
-            <div class='row ps-2 pe-2 text-center'>
-                <button type='button' class='btn bg-white' @click='login'>로그인</button>
             </div>
         </div>
-    </div>
-</div>
 
-<script>
-    const { createApp, ref, onMounted } = Vue
+        <script>
+            const { createApp, ref, onMounted } = Vue
 
-    createApp({
-        setup() {
-            const message = ref('Hello vue!')
-            const login = () => {
-                // TODO Login Process Here !!
+            createApp({
+                setup() {
+                    const message = ref('Hello vue!')
+                    const loading = ref(false)
+                    const login = () => {
+                        loading.value = true
+                        // TODO Login Process Here !!
 
-                MainApp.sendMessage('onLoginSuccess', 'INPUT YOUR USER DATA')
-            }
+                        MainApp.sendMessage('onLoginSuccess', 'INPUT YOUR USER DATA')
+                    }
 
-            const addListener = () => {
-                // MainApp 로그인 성공 이후 호출되는 이벤트 리스너 등록
-                MainApp.eventListen('replyLoginSuccess', (evt, payload) => {
-                    location.href = '../index/index.html'
-                })
-            }
+                    const addListener = () => {
+                        // MainApp 로그인 성공 이후 호출되는 이벤트 리스너 등록
+                        MainApp.eventListen('replyLoginSuccess', (evt, payload) => {
+                            location.href = '../index/index.html'
+                        })
+                    }
 
-            onMounted(() => addListener())
+                    onMounted(() => addListener())
 
-            return {
-                message,
-                login
-            }
-        }
-    }).mount('#app')
-</script>
-</body>
+                    return {
+                        message,
+                        loading,
+                        login
+                    }
+                }
+            }).mount('#app')
+        </script>
+    </body>
 </html>
