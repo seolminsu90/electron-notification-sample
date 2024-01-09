@@ -5,11 +5,21 @@ const { ipcEventListen } = require('./main/event-listener.js')
 const { loadPage } = require('./main/page.js')
 const AppConst = require('./main/const.js')
 
+const path = require('path')
+const env = process.env.NODE_ENV || 'development';
+
 require('./main/menu.js')
 require('electron-debug')() // DEBUG CONSOLE SHOW
 
 if (process.platform === 'win32') {
     app.setAppUserModelId(app.name)
+}
+
+if (env === 'development') {
+    require('electron-reload')(__dirname, {
+        electron: path.join(__dirname, 'node_modules', '.bin', 'electron'),
+        hardResetMethod: 'exit'
+    });
 }
 
 let mainWindow

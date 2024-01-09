@@ -1,131 +1,152 @@
 <!DOCTYPE html>
-<html lang='ko' xmlns='http://www.w3.org/1999/xhtml'>
-<head>
-    <meta charset='UTF-8'>
-    <title>알림앱</title>
-    <link href='../assets/reset.css' rel='stylesheet'>
-    <link href='../assets/common.css' rel='stylesheet'>
-    <link href='./index.css' rel='stylesheet'>
-</head>
-<body>
-<script src='../vue3.js'></script>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8" />
+        <title>알림앱</title>
+        <link href="../assets/reset.css" rel="stylesheet" />
+        <link href="../assets/common.css" rel="stylesheet" />
+        <link href="./index.css" rel="stylesheet" />
+    </head>
+    <body>
+        <script src="../vue3.js"></script>
 
-<div id='app'>
-    <div class='d-flex'>
-        <nav>
-            <ul class='list-group list-group-flush'>
-                <li class='list-group-item' :class="{active: active === 'setting'}" @click='moveTab("setting")'>알림 설정
-                </li>
-                <li class='list-group-item' :class="{active: active === 'history'}" @click='moveTab("history")'>알림 이력
-                </li>
-                <li class='list-group-item' :class="{active: active === 'test'}" @click='moveTab("test")'>테스트
-                </li>
-            </ul>
-        </nav>
-        <div id='content-wrap'>
-            <div v-if='active === "setting"'>
-                <div class='p-3'>
-                    <div class='d-flex align-items-center mb-4'>
-                        <label class='me-2 setting-label'>이거 알림</label>
-                        <label class='switch'>
-                            <input type='checkbox' checked>
-                            <span class='slider round'></span>
-                        </label>
-                    </div>
-                    <div class='d-flex align-items-center mb-4'>
-                        <label class='me-2 setting-label'>저거 알림</label>
-                        <label class='switch'>
-                            <input type='checkbox' checked>
-                            <span class='slider round'></span>
-                        </label>
-                    </div>
-                    <div class='d-flex align-items-center mb-4'>
-                        <label class='me-2 setting-label'>요거 알림</label>
-                        <label class='switch'>
-                            <input type='checkbox' checked>
-                            <span class='slider round'></span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div v-if='active === "history"'>
-                <div class='p-3'>
-                    <div class='mb-2 d-flex align-items-center justify-content-center'>
-                        <div class='profile-wrap'>
-                            <img src='../assets/robot.png' />
-                        </div>
-                        <div class='message-wrap'>
-                            <div class='author'>author</div>
-                            <div class='title'>title</div>
-                            <div class='content'>content</div>
-                        </div>
-                    </div>
-                    <div class='mb-2 d-flex align-items-center justify-content-center' v-for='(v,i) in messages' :key='i'>
-                        <div class='profile-wrap'>
-                            <img src='../assets/robot.png' />
-                        </div>
-                        <div class='message-wrap'>
-                            <div class='author'>ECHO</div>
-                            <div class='title'>{{v.title}}</div>
-                            <div class='content'>{{v.body}}</div>
+        <div id="app">
+            <div class="d-flex">
+                <nav>
+                    <ul class="list-group list-group-flush">
+                        <li
+                            class="list-group-item"
+                            :class="{active: active === 'setting'}"
+                            @click='moveTab("setting")'>
+                            알림 설정
+                        </li>
+                        <li
+                            class="list-group-item"
+                            :class="{active: active === 'history'}"
+                            @click='moveTab("history")'>
+                            알림 이력
+                        </li>
+                        <li
+                            class="list-group-item"
+                            :class="{active: active === 'test'}"
+                            @click='moveTab("test")'>
+                            테스트
+                        </li>
+                    </ul>
+                </nav>
+                <div id="content-wrap">
+                    <div v-if='active === "setting"'>
+                        <div class="p-3">
+                            <div class="d-flex align-items-center mb-4">
+                                <label class="me-2 setting-label">이거 알림</label>
+                                <label class="switch">
+                                    <input type="checkbox" checked />
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="d-flex align-items-center mb-4">
+                                <label class="me-2 setting-label">저거 알림</label>
+                                <label class="switch">
+                                    <input type="checkbox" checked />
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="d-flex align-items-center mb-4">
+                                <label class="me-2 setting-label">요거 알림</label>
+                                <label class="switch">
+                                    <input type="checkbox" checked />
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div v-if='active === "test"'>
-                <div class='p-3'>
-                    <div class='d-flex align-items-center justify-content-center'>
-                        <div id='output'></div>
-                        <input class='form-control' type='text' v-model='message' placeholder='Type your message'>
-                        <button class='btn btn-primary' @click='sendMessage'>Send</button>
+                    <div v-if='active === "history"'>
+                        <div class="p-3">
+                            <div class="mb-2 d-flex align-items-center justify-content-center">
+                                <div class="profile-wrap">
+                                    <img src="../assets/robot.png" />
+                                </div>
+                                <div class="message-wrap">
+                                    <div class="author">author</div>
+                                    <div class="title">title</div>
+                                    <div class="content">content</div>
+                                </div>
+                            </div>
+                            <div
+                                class="mb-2 d-flex align-items-center justify-content-center"
+                                v-for="(v,i) in messages"
+                                :key="i">
+                                <div class="profile-wrap">
+                                    <img src="../assets/robot.png" />
+                                </div>
+                                <div class="message-wrap">
+                                    <div class="author">ECHO</div>
+                                    <div class="title">{{v.title}}</div>
+                                    <div class="content">{{v.body}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-if='active === "test"'>
+                        <div class="p-3">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <div id="output"></div>
+                                <input
+                                    class="form-control"
+                                    type="text"
+                                    v-model="message"
+                                    placeholder="Type your message" />
+                                <button class="btn btn-primary" @click="sendMessage">Send</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<script>
-    const { createApp, ref, onMounted } = Vue
-    const { ipcRenderer } = require('electron')
+        <script>
+            const { createApp, ref, onMounted } = Vue
+            const { ipcRenderer } = require('electron')
 
-    createApp({
-        setup() {
-            const active = ref('setting')
-            const message = ref('')
-            const messages = ref([])
-            const sendMessage = () => {
-                const payload = {
-                    message: {
-                        title: 'message_title',
-                        body: message.value
+            createApp({
+                setup() {
+                    const active = ref('setting')
+                    const message = ref('')
+                    const messages = ref([])
+                    const sendMessage = () => {
+                        const payload = {
+                            message: {
+                                title: 'message_title',
+                                body: message.value
+                            }
+                        }
+
+                        if (ipcRenderer) ipcRenderer.send('onSendMessage', JSON.stringify(payload))
+                    }
+                    const moveTab = (tab) => {
+                        active.value = tab
+                    }
+
+                    const addListener = () => {
+                        // socket echo message
+                        if (ipcRenderer)
+                            ipcRenderer.on('replySendMessage', (evt, payload) => {
+                                console.log(payload)
+                                const msg = JSON.parse(payload)
+                                messages.value.push(msg.message)
+                            })
+                    }
+
+                    onMounted(() => addListener())
+
+                    return {
+                        active,
+                        message,
+                        messages,
+                        moveTab,
+                        sendMessage
                     }
                 }
-                ipcRenderer.send('onSendMessage', JSON.stringify(payload))
-            }
-            const moveTab = (tab) => {
-                active.value = tab
-            }
-
-            const addListener = () => {
-                // socket echo message
-                ipcRenderer.on('replySendMessage', (evt, payload) => {
-                    console.log(payload)
-                    const msg = JSON.parse(payload)
-                    messages.value.push(msg.message)
-                })
-            }
-
-            onMounted(() => addListener())
-
-            return {
-                active,
-                message,
-                messages,
-                moveTab,
-                sendMessage
-            }
-        }
-    }).mount('#app')
-</script>
-</body>
+            }).mount('#app')
+        </script>
+    </body>
 </html>

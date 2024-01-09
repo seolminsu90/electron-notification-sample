@@ -2,15 +2,17 @@
   "name": "electron-scaffold",
   "version": "1.0.0",
   "scripts": {
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "start": "set NODE_ENV=development&&electron .",
+    "package": "set NODE_ENV=production&&electron-forge package",
+    "make": "set NODE_ENV=production&&electron-forge make"
   },
   "description": "electron rnd",
   "main": "main.js",
   "author": "msuseol",
   "license": "MIT",
   "dependencies": {
+    "electron-reload": "^2.0.0-alpha.1",
+    "electron-reloader": "^1.2.3",
     "electron-squirrel-startup": "^1.0.0",
     "websocket": "^1.0.34"
   },
