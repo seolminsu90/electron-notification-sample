@@ -5,8 +5,9 @@ const ICON_PATH = path.join(__dirname, '..', 'icon.png')
 
 const createWindow = async () => {
     let mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 850,
+        height: 485,
+        resizable:false,
         title: AppConst.APPLICATION_NAME,
         webPreferences: {
             nodeIntegration: true,

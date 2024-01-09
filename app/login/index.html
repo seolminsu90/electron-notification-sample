@@ -12,24 +12,23 @@
 
 <div id='app'>
     <div class='center-flex-box'>
-        <div class='login-wrap p-3'>
-            <div class='text-center'>
+        <div class="login-bg">bg</div>
+        <div class='login-wrap'>
+            <div class='text-center mb-3'>
                 <h1>Login</h1>
             </div>
             <div class='row mb-3'>
-                <small class='form-label'>아이디</small>
                 <div class=''>
-                    <input type='text' class='form-control' />
+                    <input type='text' class='form-control' placeholder="아이디"/>
                 </div>
             </div>
             <div class='row mb-3'>
-                <small class='form-label'>비밀번호</small>
                 <div class=''>
-                    <input type='password' class='form-control' />
+                    <input type='password' class='form-control'  placeholder="패스워드"/>
                 </div>
             </div>
             <div class='row ps-2 pe-2 text-center'>
-                <button type='button' class='btn btn-primary' @click='login'>로그인</button>
+                <button type='button' class='btn bg-white' @click='login'>로그인</button>
             </div>
         </div>
     </div>

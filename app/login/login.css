@@ -2,18 +2,36 @@ body{
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
-    background-image: url("../assets/bg.jpg");
+    background:#021f4d;
+}
+
+.login-bg{
+	width:60vw;
+	height: 100vh;
+	background-color: #fff;
 }
 
 .login-wrap{
-    width:50vw;
+    width:40vw;
     height:30vh;
+	padding:2rem;
     min-width: 300px;
     min-height:300px;
-    background:#fff;
+    background:transparent;
     border-radius: 8px;
 }
 
+label{
+	color:#fff;
+}
+
+input {
+	background: transparent !important;
+	border:none !important;
+	color:#fff !important;
+}
+
 h1 {
+	color:#fff;
     font-weight: bold;
 }
